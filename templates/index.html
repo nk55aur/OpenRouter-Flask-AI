@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Assistant </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="minimal-app">
+      <form id="inputForm" class="panel input-panel" autocomplete="off">
+        <label for="userInput" class="vis">Input</label>
+        <textarea id="userInput" placeholder="Type or paste text here..." rows="4"></textarea>
+        <button id="sendBtn" type="submit" class="send">Send</button>
+      </form>
+
+      <div class="robot-wrap">
+        <!-- SVG robot inspired animation (CSS-driven) -->
+        <svg id="robot" width="140" height="140" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0" stop-color="#00b3ff" stop-opacity="1" />
+              <stop offset="1" stop-color="#006bff" stop-opacity="1" />
+            </linearGradient>
+          </defs>
+          <g class="robot-base">
+            <rect x="18" y="28" rx="14" ry="14" width="84" height="64" fill="#021b2d" stroke="#06334a" stroke-width="1"/>
+            <circle class="eye left" cx="42" cy="52" r="6" fill="#062a35" />
+            <circle class="eye right" cx="78" cy="52" r="6" fill="#062a35" />
+            <rect class="mouth" x="44" y="72" width="32" height="6" rx="3" fill="#002b3b" />
+            <rect class="glass" x="20" y="20" width="80" height="12" rx="6" fill="url(#g1)" opacity="0.08" />
+            <rect class="visor-ray" x="23" y="16" width="74" height="6" rx="3" fill="url(#g1)" opacity="0.18" />
+            <rect class="antenna" x="58" y="8" width="4" height="12" rx="2" fill="#00b3ff" />
+            <circle class="antenna-tip" cx="60" cy="6" r="3" fill="#00e1ff" />
+          </g>
+        </svg>
+      </div>
+
+      <div class="panel output-panel" id="outputPanel" aria-live="polite">
+        <pre id="output" class="output" tabindex="0">The assistant will appear here.</pre>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+  </body>
+</html>

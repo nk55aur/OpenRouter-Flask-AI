@@ -1,0 +1,96 @@
+:root{
+  --bg:#00101a;
+  --panel-1:#041426;
+  --panel-2:#072033;
+  --accent:#00b3ff;
+  --muted:#8fb0c6;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background:linear-gradient(180deg,#00101a,#021026);
+  font-family:Inter,Segoe UI,Helvetica,Arial,sans-serif;
+  color:#e6f0ff;
+  -webkit-font-smoothing:antialiased;
+  display:flex;align-items:center;justify-content:center;padding:20px
+}
+
+/* Outer container: fixed viewport fraction to keep layout predictable */
+.minimal-app{
+  display:flex;
+  align-items:stretch; /* important so panels expand vertically */
+  gap:22px;
+  max-width:1100px;
+  width:100%;
+  height:78vh; /* leave some breathing room */
+}
+
+.panel{
+  background:linear-gradient(180deg,var(--panel-1),var(--panel-2));
+  border-radius:12px;
+  padding:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  min-width:280px;
+  display:flex;
+  flex-direction:column;
+}
+
+.input-panel{
+  width:360px;
+  max-height:100%;
+  overflow:hidden; /* keep textarea inside this box */
+}
+.input-panel textarea{
+  width:100%;
+  flex:1; /* grow to fill panel */
+  min-height:80px;
+  max-height:calc(100% - 60px);
+  overflow:auto; /* allow scrolling within textarea */
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.06);
+  color:inherit;
+  padding:10px;
+  border-radius:8px;
+  resize:vertical;
+}
+.send{background:linear-gradient(90deg,var(--accent),#006bff);border:none;color:#001318;padding:10px 12px;border-radius:8px;cursor:pointer;margin-top:10px}
+
+.robot-wrap{width:160px;display:flex;align-items:center;justify-content:center}
+
+.output-panel{
+  flex:1; /* take remaining horizontal space */
+  max-height:100%;
+  overflow:auto; /* allow scrolling when content grows */
+  padding:18px;
+  align-items:flex-start;
+}
+.output{
+  white-space:pre-wrap;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  background:transparent;
+  border:none;
+  color:#dff6ff;
+  outline:none;
+  display:block;
+}
+
+/* robot SVG simple styles and animation triggers */
+svg.robot-base{display:block}
+.antenna{transform-origin:60px 14px}
+.antenna-tip{transform-origin:60px 6px}
+.eye{fill:#031b25}
+.robot-thinking .eye{fill:var(--accent)}
+.robot-thinking .antenna{animation:antenna-sway 1.4s ease-in-out infinite}
+.robot-thinking .antenna-tip{animation:antenna-tip-glow 1.4s ease-in-out infinite}
+
+@keyframes antenna-sway{0%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-6px) rotate(8deg)}100%{transform:translateY(0) rotate(-8deg)}}
+@keyframes antenna-tip-glow{0%{opacity:0.6;filter:drop-shadow(0 0 2px rgba(0,179,255,0.3))}50%{opacity:1;filter:drop-shadow(0 0 10px rgba(0,179,255,0.8))}100%{opacity:0.6;filter:drop-shadow(0 0 2px rgba(0,179,255,0.3))}}
+
+@media (max-width:860px){
+  .minimal-app{flex-direction:column;gap:12px;height:auto}
+  .input-panel{width:100%}
+  .robot-wrap{transform:scale(0.9)}
+  .output-panel{max-height:40vh}
+}
+
